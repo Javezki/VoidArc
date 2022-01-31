@@ -1,2 +1,4 @@
 # VoidArc
-Hi hello this stuff
+Minecraft Plugin that contains new items that give special effects to players and stuffs
+
+
