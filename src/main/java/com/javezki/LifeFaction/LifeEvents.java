@@ -4,17 +4,31 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
+import com.javezki.LifeFaction.LifeArmour.FLifeBoots;
+import com.javezki.LifeFaction.LifeArmour.FLifeChestplate;
+import com.javezki.LifeFaction.LifeArmour.FLifeHelmet;
+import com.javezki.LifeFaction.LifeArmour.FLifeLeggings;
+import com.javezki.LifeFaction.LifeArmour.LifeArmour;
+import com.javezki.LifeFaction.LifeUtil.FLifeEnum;
+import com.javezki.LifeFaction.LifeUtil.FLifeTomb;
+import com.javezki.LifeFaction.LifeUtil.LifeKeys;
 import com.javezki.Materials.SmallLifeForce;
-import com.javezki.PluginLib.Namespaces;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.InventoryView;
@@ -24,17 +38,17 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import io.papermc.paper.event.player.AsyncChatEvent;
 import net.md_5.bungee.api.ChatColor;
 
 public class LifeEvents implements Listener {
 
     @EventHandler
-    public void lifeArmourEffects(InventoryCloseEvent ev) {
+    public void lifeArmourEffects(PlayerArmorChangeEvent ev) {
         Collection<PotionEffect> pEff = ev.getPlayer().getActivePotionEffects();
 
         Collection<PotionEffect> gEffToGive = new ArrayList<PotionEffect>();
 
+        //Check for normal potion effects
         for (PotionEffect potion : pEff) {
             if (potion.getDuration() < 9600) {
                 gEffToGive.add(potion);
@@ -44,6 +58,7 @@ public class LifeEvents implements Listener {
         for (PotionEffect eff : p.getActivePotionEffects()) {
             p.removePotionEffect(eff.getType());
         }
+        //Gives potion effects that 
         p.addPotionEffects(gEffToGive);
         gEffToGive.clear();
 
@@ -52,10 +67,10 @@ public class LifeEvents implements Listener {
         ItemStack[] armor = pInv.getArmorContents();
 
         ItemStack[] lifeArmor = {
-                new LifeHelmet().getItem(),
-                new LifeChestplate().getItem(),
-                new LifeLeggings().getItem(),
-                new LifeBoots().getItem()
+                new FLifeHelmet().getItem(),
+                new FLifeChestplate().getItem(),
+                new FLifeLeggings().getItem(),
+                new FLifeBoots().getItem()
         };
 
         if (armor == null)
@@ -64,7 +79,6 @@ public class LifeEvents implements Listener {
         for (int i = 0; i < 4; i++) {
             if (armor[i] == null)
                 continue;
-
             if (armor[i].equals(lifeArmor[0])) {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 3));
@@ -78,14 +92,24 @@ public class LifeEvents implements Listener {
         }
     }
 
-    public void onMessage(AsyncChatEvent ev) {
-    }
-
     @EventHandler
     public void dropLife(PlayerDeathEvent ev)   {
+
+        DamageCause damage = ev.getPlayer().getLastDamageCause().getCause();
+
+        LivingEntity e = (LivingEntity) ev.getPlayer();
+
+        if (e == null) return;
+
+        if (e.getKiller() == null) return;
+
+        if (!(e.getKiller() instanceof Player)) return;
+
+        if (!(damage == DamageCause.ENTITY_ATTACK)) return;
+
         Random random = new Random();
 
-        if (random.nextBoolean())
+        if (random.nextInt(0, 5) == 5)
         {
             World world = ev.getPlayer().getLocation().getWorld();
             world.dropItem(ev.getPlayer().getLocation(), new SmallLifeForce().getItem());
@@ -168,10 +192,58 @@ public class LifeEvents implements Listener {
             p.sendMessage(ChatColor.RED + "Must have a fragmented tomb of life in your off hand!");
             ev.getInventory().setResult(null);
         }
-        Bukkit.getLogger().info("Whats in off hand?: " + offHand);
         if (!(offHand.equals(new FLifeTomb().getItem()))) {
             p.sendMessage(ChatColor.RED + "Must have a fragmeneted tomb of life in your off hand!");
             ev.getInventory().setResult(null);
         }
+    }
+
+
+    @EventHandler
+    public void onFireDamage(EntityDamageByEntityEvent ev)
+    {
+        if (!(ev.getEntity() instanceof Player))    return;
+
+        Player damaged = (Player) ev.getEntity();
+
+        ItemStack[] armour = damaged.getInventory().getArmorContents();
+
+        ItemStack[] lifeArmour = new LifeArmour().getLifeArmour();
+
+        if (!(ev.getDamager() instanceof Player))   return;
+
+        Player damager = (Player) ev.getDamager();
+
+        if(isPlayerFireDamage(damaged, damager, armour, lifeArmour)) ev.setDamage(ev.getDamage() * 1.5);
+    }
+
+    public boolean isPlayerFireDamage(Player damaged, Player damager, ItemStack[] armour, ItemStack[] lifeArmour)
+    {
+        boolean hasArmour = false;
+        for (ItemStack lifePiece : lifeArmour)
+        {
+            for (ItemStack playerArmour : armour)
+            {
+                if (playerArmour == null) continue;
+                if (playerArmour.equals(lifePiece))
+                {
+                    hasArmour = true;
+                } 
+            }
+        }
+        if (!hasArmour) return false;
+
+        if(!(damager instanceof Player))  return false;
+        
+        ItemStack itemInHand = damager.getInventory().getItemInMainHand();
+
+        if (itemInHand == null) return false;
+
+        if (itemInHand.getItemMeta().hasEnchant(Enchantment.FIRE_ASPECT))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

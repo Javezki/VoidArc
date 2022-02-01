@@ -1,6 +1,7 @@
-package com.javezki.LifeFaction;
+package com.javezki.LifeFaction.LifeArmour;
 
-import com.javezki.PluginLib.Namespaces;
+import com.javezki.LifeFaction.LifeUtil.FLifeEnum;
+import com.javezki.LifeFaction.LifeUtil.LifeKeys;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -8,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-public class LifeChestplate extends LifeArmour {
+public class FLifeChestplate extends LifeArmour {
 
 
     public ItemStack getItem() {

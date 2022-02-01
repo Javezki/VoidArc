@@ -1,4 +1,4 @@
-package com.javezki.LifeFaction;
+package com.javezki.LifeFaction.LifeArmour;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import com.javezki.PluginLib.Namespaces;
 
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -57,6 +58,19 @@ public class LifeArmour {
 
 
         return lore;
+    }
+
+    public ItemStack[] getLifeArmour()
+    {
+        ItemStack[] lifeArmour = new ItemStack[]
+        {
+            new FLifeHelmet().getItem(),
+            new FLifeChestplate().getItem(),
+            new FLifeLeggings().getItem(),
+            new FLifeBoots().getItem()
+        };
+
+        return lifeArmour;  
     }
 
 

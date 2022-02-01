@@ -1,4 +1,4 @@
-package com.javezki.LifeFaction;
+package com.javezki.LifeFaction.LifeUtil;
 
 import com.javezki.VoidMain;
 

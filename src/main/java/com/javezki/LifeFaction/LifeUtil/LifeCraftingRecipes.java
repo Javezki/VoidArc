@@ -1,5 +1,9 @@
-package com.javezki.LifeFaction;
+package com.javezki.LifeFaction.LifeUtil;
 
+import com.javezki.LifeFaction.LifeArmour.FLifeBoots;
+import com.javezki.LifeFaction.LifeArmour.FLifeChestplate;
+import com.javezki.LifeFaction.LifeArmour.FLifeHelmet;
+import com.javezki.LifeFaction.LifeArmour.FLifeLeggings;
 import com.javezki.Materials.SmallLifeForce;
 
 import org.bukkit.Material;
@@ -22,7 +26,7 @@ public class LifeCraftingRecipes {
 
     public Recipe fLifeHelmet()
     {
-        ShapedRecipe fLifeHelmet = new ShapedRecipe(LifeKeys.fLifeHelmet(), new LifeHelmet().getItem());
+        ShapedRecipe fLifeHelmet = new ShapedRecipe(LifeKeys.fLifeHelmet(), new FLifeHelmet().getItem());
 
         fLifeHelmet.shape("lll", "lhl", "lll");
 
@@ -35,7 +39,7 @@ public class LifeCraftingRecipes {
 
     public Recipe fLifeChestplate()
     {
-        ShapedRecipe fLifeChestplate = new ShapedRecipe(LifeKeys.fLifeChestplate(), new LifeChestplate().getItem());
+        ShapedRecipe fLifeChestplate = new ShapedRecipe(LifeKeys.fLifeChestplate(), new FLifeChestplate().getItem());
 
         fLifeChestplate.shape("lll", "lcl", "lll");
 
@@ -48,7 +52,7 @@ public class LifeCraftingRecipes {
 
     public Recipe fLifeLeggings()
     {
-        ShapedRecipe fLifeLeggings = new ShapedRecipe(LifeKeys.fLifeLeggings(), new LifeLeggings().getItem());
+        ShapedRecipe fLifeLeggings = new ShapedRecipe(LifeKeys.fLifeLeggings(), new FLifeLeggings().getItem());
 
         fLifeLeggings.shape("fff", "flf", "fff");
 
@@ -61,7 +65,7 @@ public class LifeCraftingRecipes {
 
     public Recipe fLifeBoots()
     {
-        ShapedRecipe fLifeBoots = new ShapedRecipe(LifeKeys.fLifeBoots(), new LifeBoots().getItem());
+        ShapedRecipe fLifeBoots = new ShapedRecipe(LifeKeys.fLifeBoots(), new FLifeBoots().getItem());
 
         fLifeBoots.shape("lll", "lbl", "lll");
 

@@ -1,7 +1,7 @@
 package com.javezki;
 
-import com.javezki.LifeFaction.LifeCraftingRecipes;
 import com.javezki.LifeFaction.LifeEvents;
+import com.javezki.LifeFaction.LifeUtil.LifeCraftingRecipes;
 import com.javezki.PluginLib.WorkstationEvents;
 import com.javezki.TeleportingBow.TeleportingRecipes;
 import com.javezki.TeleportingBow.TeleportBowCommand;

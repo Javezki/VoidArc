@@ -3,8 +3,8 @@ package com.javezki.Materials;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javezki.LifeFaction.FLifeEnum;
-import com.javezki.LifeFaction.LifeKeys;
+import com.javezki.LifeFaction.LifeUtil.FLifeEnum;
+import com.javezki.LifeFaction.LifeUtil.LifeKeys;
 import com.javezki.PluginLib.Namespaces;
 
 import org.bukkit.Material;

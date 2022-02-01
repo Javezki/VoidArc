@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -25,33 +25,23 @@ public class TeleportEvent implements Listener {
             return;
         Player player = (Player) ev.getEntity();
 
-        // Namespaced key instance main and teleport
-        NamespacedKey key = new NamespacedKey(VoidMain.getMain(), "teleport");
+        ItemStack bow = ev.getBow();
 
-        // Get persistentData key for bow
-        String bow = ev.getBow()
-                .getItemMeta()
-                .getPersistentDataContainer()
-                .get(key, PersistentDataType.STRING);
-
-        // Get persistentData key for arrow
-        String arrow = ev.getConsumable()
-                .getItemMeta()
-                .getPersistentDataContainer()
-                .get(key, PersistentDataType.STRING);
+        ItemStack arrow = ev.getConsumable();
+        
 
         // Check if its a normal arrow
-        if (bow ==null ) {
-            bow = "bow";
-        }
-        if (arrow == null) {
-            arrow = "arrow";
-        }
 
-        if (!(isBowAndArrowValid(bow, arrow, player)))
+        if (arrow.equals(new TeleportArrow().getTeleportArrow()) && !(bow.equals(new TeleportBow().getTeleportBow()))) 
         {
             ev.setCancelled(true);
-            return;
+            player.sendMessage(ChatColor.RED + "Must use a Teleporting Bow to shoot the Void Arrow!");
+        }
+
+        if (bow.equals(new TeleportBow().getTeleportBow()) && (!(arrow.equals(new TeleportArrow().getTeleportArrow()))))
+        {
+            ev.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "Must use a Void Arrow to shoot the Teleporting Bow!");
         }
 
 
@@ -64,7 +54,9 @@ public class TeleportEvent implements Listener {
 
         Player p = (Player) ev.getEntity().getShooter();
 
-        if (!(p.getInventory().contains(new TeleportBow().getTeleportBow())))    return;
+        if (p.getInventory().getItemInMainHand() == null) return;
+
+        if (!(p.getInventory().getItemInMainHand().equals(new TeleportBow().getTeleportBow())))    return;
 
 
         if (ev.getHitEntity() == null)
@@ -144,20 +136,6 @@ public class TeleportEvent implements Listener {
 
         if (!(proj.getShooter() instanceof Player)) return false;
 
-        return true;
-    }
-
-    private boolean isBowAndArrowValid(String bow, String arrow, Player player)
-    {
-        if (bow.equals("bow") && arrow.equals("teleportArrow")) {
-            player.sendMessage("You must use a Teleport Bow to use this arrow!");
-            return false;
-        }
-
-        if (arrow.equals("arrow") && bow.equals("teleportBow")) {
-            player.sendMessage(ChatColor.RED + "You must use Void Arrows to shoot the bow!");
-            return false;
-        }
         return true;
     }
     

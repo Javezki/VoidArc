@@ -7,9 +7,9 @@ import org.bukkit.NamespacedKey;
 
 public class Namespaces {
     
-    public static NamespacedKey corruptedBow()
+    public static NamespacedKey fTeleportBow()
     {
-        return new NamespacedKey(VoidMain.getMain(), "teleportCorruptedBow");
+        return new NamespacedKey(VoidMain.getMain(), "fTeleportBow");
     }
 
     public static NamespacedKey teleportArrow()
@@ -17,9 +17,9 @@ public class Namespaces {
         return new NamespacedKey(VoidMain.getMain(), "teleportArrow");
     }
 
-    public static NamespacedKey teleportShard()
+    public static NamespacedKey fTeleportShard()
     {
-        return new NamespacedKey(VoidMain.getMain(), "teleportShard");
+        return new NamespacedKey(VoidMain.getMain(), "fTeleportShard");
     }
 
     public static NamespacedKey teleport()

@@ -1,10 +1,10 @@
 package com.javezki.TeleportingBow;
 
-import com.javezki.LifeFaction.FLifeTomb;
-import com.javezki.LifeFaction.LifeBoots;
-import com.javezki.LifeFaction.LifeChestplate;
-import com.javezki.LifeFaction.LifeHelmet;
-import com.javezki.LifeFaction.LifeLeggings;
+import com.javezki.LifeFaction.LifeArmour.FLifeBoots;
+import com.javezki.LifeFaction.LifeArmour.FLifeChestplate;
+import com.javezki.LifeFaction.LifeArmour.FLifeHelmet;
+import com.javezki.LifeFaction.LifeArmour.FLifeLeggings;
+import com.javezki.LifeFaction.LifeUtil.FLifeTomb;
 import com.javezki.Materials.EnderShard;
 
 import org.bukkit.command.Command;
@@ -87,7 +87,7 @@ public class TeleportBowCommand implements CommandExecutor  {
 
         for (int i = 0; i < count; i++)
         {
-            p.getInventory().addItem(new LifeBoots().getItem());
+            p.getInventory().addItem(new FLifeBoots().getItem());
         }
         p.sendMessage(ChatColor.GREEN + "Given " + count + " Life Boot(s)!");
     }
@@ -96,7 +96,7 @@ public class TeleportBowCommand implements CommandExecutor  {
 
         for (int i = 0; i < count; i++)
         {
-            p.getInventory().addItem(new LifeLeggings().getItem());
+            p.getInventory().addItem(new FLifeLeggings().getItem());
         }
         p.sendMessage(ChatColor.GREEN + "Given " + count + " Life Legging(s)!");
     }
@@ -104,7 +104,7 @@ public class TeleportBowCommand implements CommandExecutor  {
     private void giveLifeChestplate(Player p, int count) {
         for (int i = 0; i < count; i++)
         {
-            p.getInventory().addItem(new LifeChestplate().getItem());
+            p.getInventory().addItem(new FLifeChestplate().getItem());
         }
         p.sendMessage(ChatColor.GREEN + "Given " + count + " Life Chesplate(s)!" );
     }
@@ -148,7 +148,7 @@ public class TeleportBowCommand implements CommandExecutor  {
     {
         for (int i = 0; i < count; i++)
         {
-            p.getInventory().addItem(new LifeHelmet().getItem());
+            p.getInventory().addItem(new FLifeHelmet().getItem());
         }
         p.sendMessage(ChatColor.GREEN + "Given " + count + " Life Helmet(s)");
     }
