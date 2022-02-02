@@ -1,35 +1,29 @@
-package com.javezki.LifeFaction;
+package com.javezki.LifeFaction.LifeUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
-import com.javezki.LifeFaction.LifeArmour.FLifeBoots;
-import com.javezki.LifeFaction.LifeArmour.FLifeChestplate;
-import com.javezki.LifeFaction.LifeArmour.FLifeHelmet;
-import com.javezki.LifeFaction.LifeArmour.FLifeLeggings;
-import com.javezki.LifeFaction.LifeArmour.LifeArmour;
-import com.javezki.LifeFaction.LifeUtil.FLifeEnum;
-import com.javezki.LifeFaction.LifeUtil.FLifeTomb;
-import com.javezki.LifeFaction.LifeUtil.LifeKeys;
+import com.javezki.LifeFaction.LifeItems.FLifeBoots;
+import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
+import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
+import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
+import com.javezki.LifeFaction.LifeItems.FLifeTomb;
+import com.javezki.LifeFaction.LifeItems.LifeArmour;
 import com.javezki.Materials.SmallLifeForce;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -202,7 +196,7 @@ public class LifeEvents implements Listener {
     @EventHandler
     public void onFireDamage(EntityDamageByEntityEvent ev)
     {
-        if (!(ev.getEntity() instanceof Player))    return;
+        if (!(ev.getEntity() instanceof Player)) return;
 
         Player damaged = (Player) ev.getEntity();
 
@@ -210,7 +204,7 @@ public class LifeEvents implements Listener {
 
         ItemStack[] lifeArmour = new LifeArmour().getLifeArmour();
 
-        if (!(ev.getDamager() instanceof Player))   return;
+        if (!(ev.getDamager() instanceof Player)) return;
 
         Player damager = (Player) ev.getDamager();
 

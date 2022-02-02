@@ -1,9 +1,6 @@
 package com.javezki.TeleportingBow;
 
-import com.javezki.VoidMain;
-
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Arrow;
@@ -32,13 +29,13 @@ public class TeleportEvent implements Listener {
 
         // Check if its a normal arrow
 
-        if (arrow.equals(new TeleportArrow().getTeleportArrow()) && !(bow.equals(new TeleportBow().getTeleportBow()))) 
+        if (arrow.isSimilar(new TeleportArrow().getTeleportArrow()) && !(bow.isSimilar(new TeleportBow().getTeleportBow()))) 
         {
             ev.setCancelled(true);
             player.sendMessage(ChatColor.RED + "Must use a Teleporting Bow to shoot the Void Arrow!");
         }
 
-        if (bow.equals(new TeleportBow().getTeleportBow()) && (!(arrow.equals(new TeleportArrow().getTeleportArrow()))))
+        if (bow.isSimilar(new TeleportBow().getTeleportBow()) && (!(arrow.isSimilar(new TeleportArrow().getTeleportArrow()))))
         {
             ev.setCancelled(true);
             player.sendMessage(ChatColor.RED + "Must use a Void Arrow to shoot the Teleporting Bow!");
@@ -56,7 +53,7 @@ public class TeleportEvent implements Listener {
 
         if (p.getInventory().getItemInMainHand() == null) return;
 
-        if (!(p.getInventory().getItemInMainHand().equals(new TeleportBow().getTeleportBow())))    return;
+        if (!(p.getInventory().getItemInMainHand().isSimilar(new TeleportBow().getTeleportBow())))    return;
 
 
         if (ev.getHitEntity() == null)

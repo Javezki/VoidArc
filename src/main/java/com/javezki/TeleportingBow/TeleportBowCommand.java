@@ -1,10 +1,10 @@
 package com.javezki.TeleportingBow;
 
-import com.javezki.LifeFaction.LifeArmour.FLifeBoots;
-import com.javezki.LifeFaction.LifeArmour.FLifeChestplate;
-import com.javezki.LifeFaction.LifeArmour.FLifeHelmet;
-import com.javezki.LifeFaction.LifeArmour.FLifeLeggings;
-import com.javezki.LifeFaction.LifeUtil.FLifeTomb;
+import com.javezki.LifeFaction.LifeItems.FLifeBoots;
+import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
+import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
+import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
+import com.javezki.LifeFaction.LifeItems.FLifeTomb;
 import com.javezki.Materials.EnderShard;
 
 import org.bukkit.command.Command;

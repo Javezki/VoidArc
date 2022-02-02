@@ -12,8 +12,9 @@ import org.bukkit.inventory.ShapelessRecipe;
 public class TeleportingRecipes {
     
     public Recipe teleportBowRecipe()
-    {
-        ShapedRecipe recipe = new ShapedRecipe(Namespaces.cCorruptedTeleportBow(), new TeleportBow().getTeleportBow());
+    {   
+        ItemStack bow = new TeleportBow().getTeleportBow();
+        ShapedRecipe recipe = new ShapedRecipe(Namespaces.cTeleportBow(), bow);
         recipe.shape("sps", "pbp", "sps");
         recipe.setIngredient('s', new EnderShard().getEnderShard());
         recipe.setIngredient('p', Material.ENDER_PEARL);

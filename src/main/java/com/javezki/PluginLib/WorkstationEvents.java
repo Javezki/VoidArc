@@ -106,23 +106,6 @@ public class WorkstationEvents implements Listener{
         }
     }
 
-    @EventHandler
-    private void onPlayerJoinShowRecipe(PlayerJoinEvent ev)
-    {
-        ev.getPlayer().discoverRecipe(new NamespacedKey(VoidMain.getMain(), "teleportShard"));
-    }
-
-    @EventHandler
-    private void onDiscoveringShard(PlayerRecipeDiscoverEvent ev)
-    {
-        NamespacedKey shard = Namespaces.cTeleportShard();
-        if (ev.getRecipe().equals(shard))
-        {
-            ev.getPlayer().discoverRecipe(Namespaces.cCorruptedTeleportBow());
-            ev.getPlayer().discoverRecipe(Namespaces.cTeleportArrow());
-        }
-    }
-
     //isNotVanillaItem = 0 is false
     //isNotVanillaItem = 1 true
     public void onlyDisplayCustom(CraftingInventory cInv)

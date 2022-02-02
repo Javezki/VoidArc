@@ -62,15 +62,18 @@ public class TeleportArrow {
         meta.lore(lore);
     }
 
-
+    public enum teleportArrow
+    {
+        cTeleportArrow;
+    }
     
     private void persistentContainer(ItemMeta meta)   
     {
         PersistentDataContainer pContainer = meta.getPersistentDataContainer();
 
-        pContainer.set(Namespaces.teleport(),
+        pContainer.set(Namespaces.cTeleportArrow(),
             PersistentDataType.STRING,
-            "teleportArrow"
+            teleportArrow.cTeleportArrow.name()
         );
 
         pContainer.set(

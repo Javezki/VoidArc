@@ -65,7 +65,7 @@ public class EnderShard {
         PersistentDataContainer pContainer = meta.getPersistentDataContainer();
 
         pContainer.set(
-            Namespaces.teleport(), 
+            Namespaces.cTeleportShard(), 
             PersistentDataType.STRING,
             "teleportShard"
             );

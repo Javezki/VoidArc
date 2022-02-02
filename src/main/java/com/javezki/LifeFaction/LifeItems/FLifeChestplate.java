@@ -1,4 +1,4 @@
-package com.javezki.LifeFaction.LifeArmour;
+package com.javezki.LifeFaction.LifeItems;
 
 import com.javezki.LifeFaction.LifeUtil.FLifeEnum;
 import com.javezki.LifeFaction.LifeUtil.LifeKeys;

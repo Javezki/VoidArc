@@ -21,12 +21,7 @@ public class Namespaces {
     {
         return new NamespacedKey(VoidMain.getMain(), "fTeleportShard");
     }
-
-    public static NamespacedKey teleport()
-    {
-        return new NamespacedKey(VoidMain.getMain(), "teleport");
-    }
-    public static NamespacedKey cCorruptedTeleportBow()
+    public static NamespacedKey cTeleportBow()
     {
         return new NamespacedKey(VoidMain.getMain(), "cTeleportBow");
     }

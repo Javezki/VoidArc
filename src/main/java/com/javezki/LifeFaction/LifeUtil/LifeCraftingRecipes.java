@@ -1,9 +1,9 @@
 package com.javezki.LifeFaction.LifeUtil;
 
-import com.javezki.LifeFaction.LifeArmour.FLifeBoots;
-import com.javezki.LifeFaction.LifeArmour.FLifeChestplate;
-import com.javezki.LifeFaction.LifeArmour.FLifeHelmet;
-import com.javezki.LifeFaction.LifeArmour.FLifeLeggings;
+import com.javezki.LifeFaction.LifeItems.FLifeBoots;
+import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
+import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
+import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
 import com.javezki.Materials.SmallLifeForce;
 
 import org.bukkit.Material;

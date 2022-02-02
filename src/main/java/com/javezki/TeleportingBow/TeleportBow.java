@@ -75,13 +75,17 @@ public class TeleportBow {
         meta.lore(lore);
     }
 
+    public enum teleportBow{
+        cTeleportBow;
+    }
+
     private void persistentContainer(ItemMeta meta)  
     {
         PersistentDataContainer pContainer = meta.getPersistentDataContainer();
 
-        pContainer.set(Namespaces.teleport(),
+        pContainer.set(Namespaces.cTeleportBow(),
             PersistentDataType.STRING, 
-            "teleportCorruptedBow"
+            teleportBow.cTeleportBow.name()
         );
 
         pContainer.set(

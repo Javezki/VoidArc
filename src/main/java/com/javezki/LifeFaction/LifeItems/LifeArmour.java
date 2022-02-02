@@ -1,4 +1,4 @@
-package com.javezki.LifeFaction.LifeArmour;
+package com.javezki.LifeFaction.LifeItems;
 
 import java.util.ArrayList;
 import java.util.List;
