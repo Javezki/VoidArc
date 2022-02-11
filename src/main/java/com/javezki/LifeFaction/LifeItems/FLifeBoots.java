@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-public class FLifeBoots extends LifeArmour{
+public class FLifeBoots extends LifeItems{
     
     public ItemStack getItem()  {
 

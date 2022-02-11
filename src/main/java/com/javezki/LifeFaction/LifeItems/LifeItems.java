@@ -15,7 +15,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
-public class LifeArmour {
+public abstract class LifeItems {
     
     public void setMetaData(ItemMeta meta) {
         
@@ -60,17 +60,18 @@ public class LifeArmour {
         return lore;
     }
 
-    public ItemStack[] getLifeArmour()
+    public ItemStack[] getLifeItems()
     {
-        ItemStack[] lifeArmour = new ItemStack[]
+        ItemStack[] lifeItems = new ItemStack[]
         {
             new FLifeHelmet().getItem(),
             new FLifeChestplate().getItem(),
             new FLifeLeggings().getItem(),
-            new FLifeBoots().getItem()
+            new FLifeBoots().getItem(),
+            new FLifeTomb().getItem()
         };
 
-        return lifeArmour;  
+        return lifeItems;  
     }
 
 

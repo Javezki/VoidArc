@@ -10,15 +10,17 @@ import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
 import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
 import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
 import com.javezki.LifeFaction.LifeItems.FLifeTomb;
-import com.javezki.LifeFaction.LifeItems.LifeArmour;
+import com.javezki.LifeFaction.LifeItems.LifeItems;
 import com.javezki.Materials.SmallLifeForce;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -44,7 +46,7 @@ public class LifeEvents implements Listener {
 
         //Check for normal potion effects
         for (PotionEffect potion : pEff) {
-            if (potion.getDuration() < 9600) {
+            if (potion.getDuration() <= 200000) {
                 gEffToGive.add(potion);
             }
         }
@@ -202,13 +204,53 @@ public class LifeEvents implements Listener {
 
         ItemStack[] armour = damaged.getInventory().getArmorContents();
 
-        ItemStack[] lifeArmour = new LifeArmour().getLifeArmour();
+        ItemStack[] lifeArmour = new ItemStack[]
+        {
+            new FLifeBoots().getItem(),
+            new FLifeChestplate().getItem(),
+            new FLifeLeggings().getItem(),
+            new FLifeHelmet().getItem()
+        };
 
         if (!(ev.getDamager() instanceof Player)) return;
 
         Player damager = (Player) ev.getDamager();
 
         if(isPlayerFireDamage(damaged, damager, armour, lifeArmour)) ev.setDamage(ev.getDamage() * 1.5);
+    }
+
+    @EventHandler
+    public void onZombieDamage(EntityDamageByEntityEvent ev)
+    {
+        if (!(ev.getDamager() instanceof Zombie)) return;
+
+        if (!(ev.getEntity() instanceof Player))    return;
+
+        Player p = (Player) ev.getEntity();
+
+        ItemStack[] armourContents = p.getInventory().getArmorContents();
+
+        for (ItemStack armour : armourContents)
+        {
+            ItemStack[] allLifeArmour = new ItemStack[]
+        {
+            new FLifeBoots().getItem(),
+            new FLifeChestplate().getItem(),
+            new FLifeLeggings().getItem(),
+            new FLifeHelmet().getItem()
+        };
+            for (ItemStack lifeArmour : allLifeArmour)
+            {
+                if (armour == null) continue;
+
+                if (lifeArmour.equals(armour))  
+                {
+                    ev.setDamage(ev.getDamage()*0.2);
+                    return;
+                }
+            }
+        }
+
     }
 
     public boolean isPlayerFireDamage(Player damaged, Player damager, ItemStack[] armour, ItemStack[] lifeArmour)
@@ -232,6 +274,8 @@ public class LifeEvents implements Listener {
         ItemStack itemInHand = damager.getInventory().getItemInMainHand();
 
         if (itemInHand == null) return false;
+
+        if (itemInHand.getItemMeta() == null)   return false;
 
         if (itemInHand.getItemMeta().hasEnchant(Enchantment.FIRE_ASPECT))
         {

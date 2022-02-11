@@ -7,7 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class SweetDandelion extends LifeMaterial{
 
 
-    public ItemStack sweetDandelion()
+    public ItemStack getItem()
     {
         ItemStack dandelion = new ItemStack(Material.DANDELION);
 
@@ -19,7 +19,7 @@ public class SweetDandelion extends LifeMaterial{
         {
             "A very sweet smelling dandelion.",
             "",
-            "A key component of the life tomb"
+            "A key ingredient to create the Life Tomb"
         };
 
         meta.lore(lore(lore));

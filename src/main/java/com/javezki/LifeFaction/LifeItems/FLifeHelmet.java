@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-public class FLifeHelmet extends LifeArmour   {
+public class FLifeHelmet extends LifeItems   {
 
     public ItemStack getItem() {
         ItemStack lifeHelmet = new ItemStack(Material.IRON_HELMET);

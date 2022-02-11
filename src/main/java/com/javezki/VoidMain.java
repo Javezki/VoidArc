@@ -3,11 +3,17 @@ package com.javezki;
 import java.io.File;
 import java.io.IOException;
 
-import com.javezki.LifeFaction.LifeUtil.LifeCraftingRecipes;
+import com.javezki.LifeFaction.LifeUtil.LifeRecipes;
+import com.javezki.Attributes.AttributeEvents;
+import com.javezki.DarkFaction.CorruptedEvents;
+import com.javezki.GeneralFaction.GeneralItems.GeneralEvents.GeneralEvent;
 import com.javezki.LifeFaction.LifeUtil.LifeEvents;
+import com.javezki.PluginLib.GiveCommand;
+import com.javezki.PluginLib.TakeLifeCommand;
 import com.javezki.PluginLib.WorkstationEvents;
 import com.javezki.TeleportingBow.TeleportingRecipes;
 import com.javezki.Workstations.ResearchTableEvent;
+import com.javezki.Workstations.WorkstationRecipes;
 import com.javezki.TeleportingBow.TeleportBowCommand;
 import com.javezki.TeleportingBow.TeleportEvent;
 
@@ -25,25 +31,29 @@ import net.md_5.bungee.api.ChatColor;
 public class VoidMain extends JavaPlugin
 {
     
-    private static File customConfigFile;
+    private static File researchLocationFile;
 
-    private static FileConfiguration customConfig;
+    private static FileConfiguration researchLocationConfig;
 
     private static VoidMain plugin;
     @Override
     public void onEnable()  {
         plugin = this;
         getServer().getLogger().info(ChatColor.BLUE + "Initializing Teleport Bow Command...");
-        this.getCommand("ccg").setExecutor(new TeleportBowCommand());
+        this.getCommand("ccg").setExecutor(new GiveCommand());
+        this.getCommand("cct").setExecutor(new TakeLifeCommand());
         getServer().getLogger().info(ChatColor.BLUE + "Intializing Event Methods...");
         getServer().getPluginManager().registerEvents(new TeleportEvent(), this);
         getServer().getPluginManager().registerEvents(new WorkstationEvents(), this);
         getServer().getPluginManager().registerEvents(new LifeEvents(), this);
         getServer().getPluginManager().registerEvents(new ResearchTableEvent(), this);
+        getServer().getPluginManager().registerEvents(new CorruptedEvents(), this);
+        getServer().getPluginManager().registerEvents(new AttributeEvents(), this);
+        getServer().getPluginManager().registerEvents(new GeneralEvent(), this);
         getServer().getLogger().info(ChatColor.BLUE + "Initializing Crafting Methods...");
         recipes();
         getServer().getLogger().info(ChatColor.BLUE + "Initializing save file");
-        createCustomConfig();
+        createResearchLocationConfig();
         getServer().getLogger().info(ChatColor.BLUE + "BowMain Initialized Properly!");
     }
 
@@ -59,7 +69,9 @@ public class VoidMain extends JavaPlugin
 
     private void recipes()  {
         TeleportingRecipes endCraft = new TeleportingRecipes();
-        LifeCraftingRecipes lifeCraft = new LifeCraftingRecipes();
+        LifeRecipes lifeCraft = new LifeRecipes();
+        WorkstationRecipes workCraft = new WorkstationRecipes();
+        getServer().addRecipe(workCraft.researchTable());
         getServer().addRecipe(endCraft.teleportBowRecipe());
         getServer().addRecipe(endCraft.enderShard());
         getServer().addRecipe(endCraft.teleportArrowRecipe());
@@ -68,29 +80,30 @@ public class VoidMain extends JavaPlugin
         getServer().addRecipe(lifeCraft.fLifeLeggings());
         getServer().addRecipe(lifeCraft.fLifeHelmet());
         getServer().addRecipe(lifeCraft.fLifeShard());
+        getServer().addRecipe(lifeCraft.fLifeTomb());
     }
 
     public static FileConfiguration getResearchLocationConfig()  
     {
-        return customConfig;
+        return researchLocationConfig;
     }
 
-    private void createCustomConfig()
+    private void createResearchLocationConfig()
     {
-        customConfigFile = new File(plugin.getDataFolder(), "/researchTableLocation.yml");
-        customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
-        saveCustomConfig(customConfig, customConfigFile);
-        if (!customConfigFile.exists()) {
+        researchLocationFile = new File(plugin.getDataFolder(), "/researchTableLocation.yml");
+        researchLocationConfig = YamlConfiguration.loadConfiguration(researchLocationFile);
+        saveResearchLocationConfig(researchLocationConfig, researchLocationFile);
+        if (!researchLocationFile.exists()) {
             saveResource("researchTableLocation.yml", false);
         }
     }
 
-    public static File getCustomFile()
+    public static File getResearchLocationFile()
     {
-        return customConfigFile;
+        return researchLocationFile;
     }
 
-    public static void saveCustomConfig(FileConfiguration ymlConfig, File ymlFile)
+    public static void saveResearchLocationConfig(FileConfiguration ymlConfig, File ymlFile)
     {
         try{
             ymlConfig.save(ymlFile);

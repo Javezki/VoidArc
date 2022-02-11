@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.javezki.VoidMain;
 import com.javezki.LifeFaction.LifeMaterials.LifeMaterial;
+import com.javezki.LifeFaction.LifeMaterials.LilyPad;
+import com.javezki.LifeFaction.LifeMaterials.MagicalOak;
+import com.javezki.LifeFaction.LifeMaterials.SugarCane;
 import com.javezki.LifeFaction.LifeMaterials.SweetDandelion;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,6 +18,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -32,23 +35,26 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ResearchTableEvent implements Listener {
 
+
+    //Handles all events occuring when a research table is placed
     @EventHandler
     private void researchTablePlace(BlockPlaceEvent ev) {
 
         ItemStack researchTable = ev.getItemInHand();
 
-        VoidMain.getResearchLocationConfig().set("Location ID: " + ev.getBlockPlaced().getLocation().toBlockKey(),
-                ev.getBlockPlaced().getLocation());
-
-        VoidMain.saveCustomConfig(VoidMain.getResearchLocationConfig(), VoidMain.getCustomFile());
-
         if (researchTable == null)
             return;
 
         if (researchTable.isSimilar(new ResearchTable().getItem())) {
+            VoidMain.getResearchLocationConfig().set("Location ID: " + ev.getBlockPlaced().getLocation().toBlockKey(),
+                    ev.getBlockPlaced().getLocation());
+
+            VoidMain.saveResearchLocationConfig(VoidMain.getResearchLocationConfig(), VoidMain.getResearchLocationFile());
         }
     }
 
+
+    //Handles all events whenever a player interacts with an inventory
     @EventHandler(priority = EventPriority.HIGHEST)
     private void interactWithResearchTable(PlayerInteractEvent ev) {
 
@@ -69,10 +75,10 @@ public class ResearchTableEvent implements Listener {
         ev.getPlayer().openInventory(new ResearchTable().researchTableInventory());
     }
 
+
+    //Handles all events within the Research Table Inventory
     @EventHandler
     public void researchTableInventory(InventoryClickEvent ev) {
-
-        Bukkit.getLogger().info("It ran");
 
         if (ev.getCurrentItem() == null)
             return;
@@ -92,20 +98,28 @@ public class ResearchTableEvent implements Listener {
         if (ev.getCurrentItem().equals(new ResearchTable().confirm())) {
             ev.setCancelled(true);
 
+            Inventory researchTable = ev.getInventory();
+
+            int itemCount = getAmountOfItems(researchTable);
+
+            if (itemCount > 1) {
+                p.sendMessage(ChatColor.RED + "You can only research 1 item at a time!");
+                return;
+            }
+
             ItemStack left1 = ev.getInventory().getItem(11);
             ItemStack left2 = ev.getInventory().getItem(12);
-
-            Inventory researchTable = ev.getInventory();
+            ItemStack researchingItem = new ItemStack(Material.AIR);
 
             Material researching = theLifeMaterial(left1, left2);
 
-            ItemStack researchingItem = new ItemStack(Material.IRON_AXE);
-
-            if (researchTable.getItem(11) != null)
-                researchingItem = researchTable.getItem(11);
-
-            else if (researchTable.getItem(12) != null)
-                researchingItem = researchTable.getItem(12);
+            if (p.getLevel() < 10)
+            {
+                p.sendMessage(ChatColor.RED + "You need at least 10 levels to attempt a research!");
+                return;
+            }
+            else    p.setLevel(p.getLevel() -10);
+            
 
             // Check if researching value is null
             if (researching == null) {
@@ -113,94 +127,148 @@ public class ResearchTableEvent implements Listener {
                 return;
             }
 
+            researchingItem = getResearchingTypeItem(researchingItem, researchTable);
+
+            ItemStack researchedItem = new ItemStack(Material.AIR);
+
+            Integer researchLevel = checkResearchLevel(researchingItem);
+
             // Dandelion researching for Sweet Dandelion
-            if (researching.equals(Material.DANDELION)) {
+            if (researching.equals(Material.DANDELION))
+                researchedItem = setDandelion(researchLevel, researchingItem, p);
+            // Oak Sapling research
+            else if (researching.equals(Material.OAK_SAPLING))
+                researchedItem = setMagicSapling(researchLevel, researchingItem, p);
+            // Lily Pad research
+            else if (researching.equals(Material.LILY_PAD))
+                researchedItem = setLilyPad(researchLevel, researchingItem, p);
+            // Sugar Cane Research
+            else if (researching.equals(Material.SUGAR_CANE))
+                researchedItem = setSugarCane(researchLevel, researchingItem, p);
 
-                Integer researchLevel = checkResearchLevel(researchingItem);
-
-                ItemStack researchedItem = setResearchLevel(researchLevel, researchingItem, p);
-
-                researchedItem.setAmount(1);
-
-                p.getInventory().addItem(researchedItem);
-
-                researchTable.setItem(15, researchedItem);;
-            }
-
-            else if (researching.equals(Material.OAK_SAPLING)) {
-                // Sapling
-            } else if (researching.equals(Material.LILY_PAD)) {
-                // Lilypad
-            } else if (researching.equals(Material.SUGAR_CANE)) {
-                // Sugar Cane
-            }
+            // Sets the Research Table contents
+            setResearchedItem(researchTable, researchedItem);
         }
     }
 
-    // Sets the inventory contents of the research table to desired results
-    private void setInventoryContents(Inventory researchTable, Player p) {
+    private ItemStack setSugarCane(Integer researchLevel, ItemStack researchingItem, Player p) {
+        ItemStack researchedItem = setResearchLevel(researchLevel, researchingItem, p);
 
-        ItemStack leftSlot = researchTable.getItem(11);
+        if (researchedItem == null)
+            researchedItem = new SugarCane().getItem();
 
-        Bukkit.getLogger().info("The left slot: " + leftSlot);
-
-        if (leftSlot == null) {
-            leftSlot = new ItemStack(Material.AIR);
-        } else if (leftSlot != null) {
-            leftSlot.setAmount(researchTable.getItem(11).getAmount() - 1);
-        }
-
-        Bukkit.getLogger().info("New left slot: " + leftSlot);
-
-        ItemStack rightSlot = researchTable.getItem(12);
-
-        Bukkit.getLogger().info("The right slot: " + rightSlot);
-
-        if (rightSlot == null) {
-            rightSlot = new ItemStack(Material.AIR);
-        }
-        else if (rightSlot != null) {
-            rightSlot.setAmount(researchTable.getItem(12).getAmount() - 1);
-        } 
-
-        Bukkit.getLogger().info("The new right slot: " + rightSlot);
-
-        researchTable.setItem(11, leftSlot);
-        researchTable.setItem(12, rightSlot);
-        if (researchTable.getItem(14) != null)
-            p.getInventory().addItem(researchTable.getItem(14));
-        if (researchTable.getItem(15) != null)
-            p.getInventory().addItem(researchTable.getItem(15));
+        return researchedItem;
     }
 
-    // changes research level of researching items
+    private ItemStack setLilyPad(Integer researchLevel, ItemStack researchingItem, Player p) {
+        ItemStack researchedItem = setResearchLevel(researchLevel, researchingItem, p);
+
+        if (researchedItem == null)
+            researchedItem = new LilyPad().getItem();
+
+        return researchedItem;
+    }
+
+    private ItemStack setMagicSapling(Integer researchLevel, ItemStack researchingItem, Player p) {
+        ItemStack researchedItem = setResearchLevel(researchLevel, researchingItem, p);
+
+        if (researchedItem == null)
+            researchedItem = new MagicalOak().getItem();
+
+        return researchedItem;
+    }
+
+    private ItemStack setDandelion(Integer researchLevel, ItemStack researchingItem, Player p) {
+        ItemStack researchedItem = setResearchLevel(researchLevel, researchingItem, p);
+
+        if (researchedItem == null)
+            researchedItem = new SweetDandelion().getItem();
+
+        return researchedItem;
+    }
+
+    private ItemStack getResearchingTypeItem(ItemStack researchingItem, Inventory researchTable) {
+        if (researchTable.getItem(11) != null)
+            researchingItem = researchTable.getItem(11);
+
+        else if (researchTable.getItem(12) != null)
+            researchingItem = researchTable.getItem(12);
+
+        return researchingItem;
+
+    }
+
+    private int getAmountOfItems(Inventory researchTable) {
+
+        int itemCount = 0;
+        if (researchTable.getItem(11) != null)
+            itemCount += researchTable.getItem(11).getAmount();
+
+        if (researchTable.getItem(12) != null)
+            itemCount += researchTable.getItem(12).getAmount();
+
+        return itemCount;
+    }
+
+    //Handles all events when a research table's inventory closes
+    @EventHandler
+    private void onInventoryClose(InventoryCloseEvent ev) {
+
+        if (!ev.getInventory().contains(new ResearchTable().confirm()))
+            return;
+
+        ItemStack[] inventory = new ItemStack[] {
+                ev.getInventory().getItem(11),
+                ev.getInventory().getItem(12),
+                ev.getInventory().getItem(14),
+                ev.getInventory().getItem(15)
+        };
+
+        for (ItemStack item : inventory) {
+            if (item == null)
+                continue;
+
+            ev.getPlayer().getInventory().addItem(item);
+        }
+    }
+
+    //Handles all events on research table breaking
+    @EventHandler
+    private void onResearchTableBreak(BlockBreakEvent ev) {
+        if (!ev.getBlock().getType().equals(Material.ENCHANTING_TABLE))
+            return;
+
+        if (VoidMain.getResearchLocationConfig().getLocation("Location ID: " + ev.getBlock().getLocation().toBlockKey()) == null) return;
+        
+        VoidMain.getResearchLocationConfig().set("Location ID: " + ev.getBlock().getLocation().toBlockKey(), null);
+        VoidMain.saveResearchLocationConfig(VoidMain.getResearchLocationConfig(), VoidMain.getResearchLocationFile());
+
+        ev.setDropItems(false);
+
+        ev.getBlock().getWorld().dropItem(ev.getBlock().getLocation(), new ResearchTable().getItem());
+    }
+
+    private void setResearchedItem(Inventory researchTable, ItemStack researchedItem) {
+        researchedItem.setAmount(1);
+
+        researchTable.setItem(15, researchedItem);
+
+        researchTable.setItem(11, null);
+
+        researchTable.setItem(12, null);
+    }
+
     private ItemStack setResearchLevel(Integer researchLevel, ItemStack researching, Player p) {
         if (researchLevel == null) {
             p.sendMessage(ChatColor.BLUE + "Research level increased by 1");
-            ItemStack researchingItem = researching;
-            ItemMeta meta = researchingItem.getItemMeta();
-            meta.getPersistentDataContainer().set(LifeMaterial.researchLevel(), PersistentDataType.INTEGER, 1);
 
-            meta.displayName(Component.text("Deciphering...", TextColor.color(255, 255, 0)));
-
-            List<Component> lore = new ArrayList<>();
-
-            lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAD", TextColor.color(255, 255, 0)));
-            lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAD", TextColor.color(255, 255, 0)));
-            lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAD", TextColor.color(255, 255, 0)));
-
-            meta.lore(lore);
-
-            researchingItem.setItemMeta(meta);
-
-            Bukkit.getLogger().info("The researching item: " + researchingItem);
-            return researchingItem;
+            return newDecipheringItem(researching);
         }
 
         // Successfully created Sweet Dandelion
         else if (researchLevel.equals(4)) {
-            p.sendMessage(ChatColor.GREEN + "Successfully researched sweet dandelion!");
-            return new SweetDandelion().sweetDandelion();
+            p.sendMessage(ChatColor.GREEN + "Successfully researched *some placeholder here idfk*!");
+            return null;
         }
 
         // The material is already maxed research level
@@ -212,25 +280,52 @@ public class ResearchTableEvent implements Listener {
         // Increases research level by 1 through item meta and persistent data
         else {
             p.sendMessage(ChatColor.BLUE + "Research level increased by 1");
-            ItemMeta meta = researching.getItemMeta();
-            meta.getPersistentDataContainer().set(LifeMaterial.researchLevel(), PersistentDataType.INTEGER,
-                    researchLevel + 1);
-            researching.setItemMeta(meta);
-
-            meta.displayName(Component.text("Deciphering...", TextColor.color(255, 255, 0))
-                    .decoration(TextDecoration.ITALIC, false));
-
-            List<Component> lore = new ArrayList<>();
-
-            lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAD", TextColor.color(255, 255, 0)));
-            lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAD", TextColor.color(255, 255, 0)));
-            lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAD", TextColor.color(255, 255, 0)));
-
-            meta.lore(lore);
-
-            researching.setItemMeta(meta);
+            return increasedResearchLevelItem(researching, researchLevel);
         }
+    }
+
+    private ItemStack increasedResearchLevelItem(ItemStack researching, Integer researchLevel) {
+        ItemMeta meta = researching.getItemMeta();
+        meta.getPersistentDataContainer().set(LifeMaterial.researchLevel(), PersistentDataType.INTEGER,
+                researchLevel + 1);
+        researching.setItemMeta(meta);
+
+        meta.displayName(Component.text("Deciphering...", TextColor.color(255, 255, 0))
+                .decoration(TextDecoration.ITALIC, false));
+
+        List<Component> lore = new ArrayList<>();
+
+        lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDADASDADADADAD", TextColor.color(255, 255, 0)));
+        lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDADADADADADASDAWD", TextColor.color(255, 255, 0)));
+        lore.add(Component.text(ChatColor.MAGIC + "ADJAWHDJADWHDAwDAWDASDAWDAWAD", TextColor.color(255, 255, 0)));
+
+        meta.lore(lore);
+
+        researching.setItemMeta(meta);
+
         return researching;
+    }
+
+    private ItemStack newDecipheringItem(ItemStack researching) {
+        ItemStack researchingItem = researching;
+        ItemMeta meta = researchingItem.getItemMeta();
+        meta.getPersistentDataContainer().set(LifeMaterial.researchLevel(), PersistentDataType.INTEGER, 1);
+
+        meta.displayName(Component.text("Deciphering...", TextColor.color(255, 255, 0)));
+
+        List<Component> lore = new ArrayList<>();
+
+        lore.add(Component.text(ChatColor.MAGIC + "ADAWDSAWDSAWDSAWDSAWDSAFAWDADAADADADA",
+                TextColor.color(255, 255, 0)));
+        lore.add(Component.text(ChatColor.MAGIC + "ADJAWADADAwADADAADADAADADADHDJADWHDAD",
+                TextColor.color(255, 255, 0)));
+        lore.add(Component.text(ChatColor.MAGIC + "ADJAWHADADADWASDAWdsAwDSDJADWHDAD", TextColor.color(255, 255, 0)));
+
+        meta.lore(lore);
+
+        researchingItem.setItemMeta(meta);
+
+        return researchingItem;
     }
 
     // Gets the research level of said item

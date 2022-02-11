@@ -1,8 +1,10 @@
 main: com.javezki.VoidMain
-name: teleportingbow
+name: voidarc
 api-version: 1.18
 version: 0.1
 commands:
   ccg:
+    usage: /<command>
+  cct:
     usage: /<command>
     

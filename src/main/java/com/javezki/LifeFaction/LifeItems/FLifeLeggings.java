@@ -11,7 +11,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 
-public class FLifeLeggings extends LifeArmour {
+public class FLifeLeggings extends LifeItems {
     
     public ItemStack getItem()
     {

@@ -1,12 +1,14 @@
 package com.javezki.Workstations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.javezki.VoidMain;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -29,6 +31,29 @@ public class ResearchTable {
         PersistentDataContainer pContainer = meta.getPersistentDataContainer();
 
         pContainer.set(WorkstationKeys.researchTable(), PersistentDataType.STRING, "researchTable");
+
+        meta.displayName(Component.text("Research Table", TextColor.color(255, 0, 0))
+        .decoration(TextDecoration.ITALIC, false));
+
+
+        List<Component> lore = new ArrayList<>();
+
+        lore.add(Component.text("")
+        );
+
+        lore.add(Component.text("The research table is a vital step, to ")
+        .decoration(TextDecoration.ITALIC, false)
+        );
+
+        lore.add(Component.text("AHDAWHDUAHDUAWHHUDW")
+        .decoration(TextDecoration.ITALIC, false)
+        .decoration(TextDecoration.OBFUSCATED, true)
+        );
+
+        
+        meta.lore(lore);
+
+        researchTable.setItemMeta(meta);
 
         return researchTable;
     }

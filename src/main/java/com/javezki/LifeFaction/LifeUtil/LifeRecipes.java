@@ -4,6 +4,11 @@ import com.javezki.LifeFaction.LifeItems.FLifeBoots;
 import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
 import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
 import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
+import com.javezki.LifeFaction.LifeItems.FLifeTomb;
+import com.javezki.LifeFaction.LifeMaterials.LilyPad;
+import com.javezki.LifeFaction.LifeMaterials.MagicalOak;
+import com.javezki.LifeFaction.LifeMaterials.SugarCane;
+import com.javezki.LifeFaction.LifeMaterials.SweetDandelion;
 import com.javezki.Materials.SmallLifeForce;
 
 import org.bukkit.Material;
@@ -11,7 +16,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
-public class LifeCraftingRecipes {
+public class LifeRecipes {
     
     public Recipe fLifeShard()  
     {
@@ -74,5 +79,35 @@ public class LifeCraftingRecipes {
         fLifeBoots.setIngredient('b', Material.IRON_BOOTS);
 
         return fLifeBoots;
+    }
+
+    public Recipe fLifeTomb()
+    {
+        ShapelessRecipe recipe = new ShapelessRecipe(LifeKeys.fLifeTomb(), new FLifeTomb().getItem());
+
+        recipe.addIngredient(new LilyPad().getItem());
+
+        recipe.addIngredient(new MagicalOak().getItem());
+
+        recipe.addIngredient(new SugarCane().getItem());
+        
+        recipe.addIngredient(new SweetDandelion().getItem());
+
+        return recipe;
+    }
+
+    public Recipe[] allLifeRecipes()
+    {
+        Recipe[] recipes = new Recipe[]
+        {
+            fLifeShard(),
+            fLifeHelmet(),
+            fLifeChestplate(),
+            fLifeLeggings(),
+            fLifeBoots(),
+            fLifeTomb()
+        };
+
+        return recipes;
     }
 }
