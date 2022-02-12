@@ -18,6 +18,7 @@ com\javezki\LifeFaction\LifeUtil\FLifeEnum.class
 com\javezki\TeleportingBow\TeleportBow.class
 com\javezki\PluginLib\TakeLifeCommand.class
 com\javezki\Materials\Materials.class
+com\javezki\LifeFaction\LifeItems\FLifeSword.class
 com\javezki\Materials\MaterialRecipes.class
 com\javezki\GeneralFaction\GeneralItems\GeneralEvents\GeneralEvent.class
 com\javezki\LifeFaction\LifeMaterials\SweetDandelion.class
@@ -51,6 +52,7 @@ com\javezki\VoidMain.class
 com\javezki\WorkstationLocations\ResearchTableLocation.class
 com\javezki\Workstations\WorkstationCommands.class
 com\javezki\LifeFaction\LifeUtil\LifeRecipes.class
+com\javezki\LifeFaction\LifeUtil\LifeSwordEvent.class
 com\javezki\TeleportingBow\TeleportingRecipes.class
 com\javezki\Workstations\WorkstationRecipes.class
 com\javezki\LifeFaction\LifeUtil\LifeKeys.class

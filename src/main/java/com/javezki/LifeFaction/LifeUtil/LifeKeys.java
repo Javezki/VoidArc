@@ -8,6 +8,11 @@ public class LifeKeys {
 
     private static VoidMain main = VoidMain.getMain();
 
+    public static NamespacedKey fLifeSword()
+    {
+        return new NamespacedKey(main, "fLifeSword");
+    }
+
     public static NamespacedKey fLifeTomb()
     {
         return new NamespacedKey(main, "fLifeTomb");

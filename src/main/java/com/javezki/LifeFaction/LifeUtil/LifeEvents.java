@@ -10,10 +10,8 @@ import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
 import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
 import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
 import com.javezki.LifeFaction.LifeItems.FLifeTomb;
-import com.javezki.LifeFaction.LifeItems.LifeItems;
 import com.javezki.Materials.SmallLifeForce;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
@@ -37,6 +35,12 @@ import org.bukkit.potion.PotionEffectType;
 import net.md_5.bungee.api.ChatColor;
 
 public class LifeEvents implements Listener {
+
+    @EventHandler
+    public void onSwordHit(EntityDamageByEntityEvent ev)
+    {
+        new LifeSwordEvent().onHit(ev);
+    }
 
     @EventHandler
     public void lifeArmourEffects(PlayerArmorChangeEvent ev) {
@@ -115,12 +119,14 @@ public class LifeEvents implements Listener {
     @EventHandler
     public void onCrafting(PrepareItemCraftEvent ev) {
 
+        //The items needs tomb in off hand
         String[] items = new String[] {
                 FLifeEnum.fLifeBoots.name(),
                 FLifeEnum.fLifeLeggings.name(),
                 FLifeEnum.fLifeChesplate.name(),
                 FLifeEnum.fLifeHelmet.name(),
-                FLifeEnum.fLifeSmallForce.name()
+                FLifeEnum.fLifeSmallForce.name(),
+                FLifeEnum.fLifeSword.name()
         };
 
         ItemStack result = ev.getInventory().getResult();
@@ -154,7 +160,8 @@ public class LifeEvents implements Listener {
                 LifeKeys.fLifeHelmet(),
                 LifeKeys.fLifeChestplate(),
                 LifeKeys.fLifeLeggings(),
-                LifeKeys.fLifeBoots()
+                LifeKeys.fLifeBoots(),
+                LifeKeys.fLifeSword()
         };
 
         for (NamespacedKey key : keys) {

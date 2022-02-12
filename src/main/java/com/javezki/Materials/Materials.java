@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javezki.PluginLib.Namespaces;
-import com.javezki.Workstations.WorkstationKeys;
 
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import net.kyori.adventure.bossbar.BossBar.Color;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;

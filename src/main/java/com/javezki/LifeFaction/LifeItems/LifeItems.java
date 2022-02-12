@@ -40,7 +40,7 @@ public abstract class LifeItems {
         .decoration(TextDecoration.ITALIC, false);
     }
 
-    public List<Component> setLore()
+    public List<Component> setArmourLore()
     {
         Component line1 = Component.text("A piece of armour that is crafted with a shallow ", TextColor.color(255, 255, 255))
         .decoration(TextDecoration.ITALIC, false);
@@ -56,6 +56,18 @@ public abstract class LifeItems {
         lore.add(line1);
         lore.add(line2);
 
+
+        return lore;
+    }
+
+    protected List<Component> setLore(String[] rawLore)
+    {
+        List<Component> lore = new ArrayList<>();
+        for (String line : rawLore)
+        {
+            lore.add(Component.text(line, TextColor.color(255, 255, 255))
+            .decoration(TextDecoration.ITALIC, false));
+        }
 
         return lore;
     }

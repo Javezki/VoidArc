@@ -1,17 +1,13 @@
 package com.javezki.PluginLib;
 
-import com.javezki.VoidMain;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRecipeDiscoverEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.InventoryView;
@@ -119,7 +115,6 @@ public class WorkstationEvents implements Listener{
             cInv.setResult(null);
             return;
         }
-        Bukkit.getLogger().info("Is a vanilla item?: " + isNotVanilla);
         if (isNotVanilla == 0)
         {
             cInv.setResult(null);

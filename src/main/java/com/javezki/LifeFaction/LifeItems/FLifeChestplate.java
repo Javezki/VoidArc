@@ -19,7 +19,7 @@ public class FLifeChestplate extends LifeItems {
 
         meta.displayName(setDisplayName("Fragmented Life Chestplate"));
 
-        meta.lore(setLore());
+        meta.lore(setArmourLore());
 
         setMetaData(meta);
 

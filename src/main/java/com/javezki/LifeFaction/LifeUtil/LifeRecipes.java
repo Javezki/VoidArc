@@ -4,6 +4,7 @@ import com.javezki.LifeFaction.LifeItems.FLifeBoots;
 import com.javezki.LifeFaction.LifeItems.FLifeChestplate;
 import com.javezki.LifeFaction.LifeItems.FLifeHelmet;
 import com.javezki.LifeFaction.LifeItems.FLifeLeggings;
+import com.javezki.LifeFaction.LifeItems.FLifeSword;
 import com.javezki.LifeFaction.LifeItems.FLifeTomb;
 import com.javezki.LifeFaction.LifeMaterials.LilyPad;
 import com.javezki.LifeFaction.LifeMaterials.MagicalOak;
@@ -109,5 +110,10 @@ public class LifeRecipes {
         };
 
         return recipes;
+    }
+
+    public Recipe FLifeSword()
+    {
+        return new FLifeSword().lifeSwordRecipe();
     }
 }

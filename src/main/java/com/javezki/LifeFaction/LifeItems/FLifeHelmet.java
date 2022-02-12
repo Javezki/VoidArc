@@ -19,7 +19,7 @@ public class FLifeHelmet extends LifeItems   {
 
         meta.displayName(setDisplayName("Corrupted Life Helmet"));
 
-        meta.lore(setLore());
+        meta.lore(setArmourLore());
 
         setMetaData(meta);
 

@@ -27,7 +27,7 @@ public class FLifeLeggings extends LifeItems {
 
         pContainer.set(LifeKeys.fLifeLeggings(), PersistentDataType.STRING, FLifeEnum.fLifeLeggings.name());
 
-        meta.lore(setLore());
+        meta.lore(setArmourLore());
 
         lifeLeggings.setItemMeta(meta);
         

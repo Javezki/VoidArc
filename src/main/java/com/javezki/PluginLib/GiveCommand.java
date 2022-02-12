@@ -4,6 +4,7 @@ import com.javezki.DarkFaction.CorruptedItems.CorruptedFlesh;
 import com.javezki.DarkFaction.CorruptedItems.CorruptedPower;
 import com.javezki.GeneralFaction.GeneralItems.GeneralItems.SoulPaper;
 import com.javezki.GeneralFaction.GeneralItems.GeneralItems.UnbreakablePP;
+import com.javezki.LifeFaction.LifeItems.FLifeSword;
 import com.javezki.LifeFaction.LifeUtil.LifeCommands;
 import com.javezki.TeleportingBow.TeleportArrow;
 import com.javezki.TeleportingBow.TeleportBow;
@@ -45,6 +46,8 @@ public class GiveCommand implements CommandExecutor {
         p.getInventory().addItem(new CorruptedPower().getItem());
 
         p.getInventory().addItem(new CorruptedFlesh().getItem());
+
+        p.getInventory().addItem(new FLifeSword().getItem());
 
         return false;
     }

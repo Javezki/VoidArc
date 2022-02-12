@@ -25,7 +25,7 @@ public class FLifeBoots extends LifeItems{
 
         pContainer.set(LifeKeys.fLifeBoots(), PersistentDataType.STRING, FLifeEnum.fLifeBoots.name());
 
-        meta.lore(setLore());
+        meta.lore(setArmourLore());
 
         lifeBoots.setItemMeta(meta);
 

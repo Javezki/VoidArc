@@ -87,6 +87,7 @@ public class VoidMain extends JavaPlugin
         getServer().addRecipe(lifeCraft.fLifeShard());
         getServer().addRecipe(lifeCraft.fLifeTomb());
         getServer().addRecipe(corruptedCraft.corruptedWand());
+        getServer().addRecipe(lifeCraft.FLifeSword());
     }
 
     public static FileConfiguration getResearchLocationConfig()  
