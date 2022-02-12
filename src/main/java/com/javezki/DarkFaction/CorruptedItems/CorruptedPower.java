@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import net.kyori.adventure.text.Component;
+import net.md_5.bungee.api.ChatColor;
 
 public class CorruptedPower extends CorruptedItem {
 
@@ -40,8 +41,8 @@ public class CorruptedPower extends CorruptedItem {
     }
 
     public final void onUse(PlayerInteractEvent ev) {
-        if (!(ev.getAction().equals(Action.RIGHT_CLICK_AIR)) ||
-                !(ev.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
+        if (ev.getAction().equals(Action.LEFT_CLICK_AIR) ||
+                (ev.getAction().equals(Action.LEFT_CLICK_BLOCK)))
             return;
 
         Player p = ev.getPlayer();
@@ -51,24 +52,26 @@ public class CorruptedPower extends CorruptedItem {
         if (inv.getItemInMainHand() == null)
             return;
 
-        if (!(inv.getItemInMainHand().equals(new CorruptedPower().getItem())))
+        if (!(inv.getItemInMainHand().isSimilar(new CorruptedPower().getItem())))
             return;
 
-        for (ItemStack rottenFlesh : inv.getStorageContents()) {
+        for (ItemStack rottenFlesh : inv.getContents()) {
+            if (rottenFlesh == null) continue;
             if (Material.ROTTEN_FLESH.equals(rottenFlesh.getType())) {
                 if (isCorruptedFlesh(rottenFlesh) == true) {
                     giveStatusEffects(p);
-                    rottenFlesh.setAmount(1);
-                    inv.remove(rottenFlesh);
+                    rottenFlesh.setAmount(rottenFlesh.getAmount() - 1);
+                    p.sendMessage(ChatColor.DARK_RED + "Corrupted Power has been activated");
                     return;
                 }
             }
         }
+        p.sendMessage(ChatColor.RED + "You must have a corrupted flesh in your inventory!");
     }
 
     private final void giveStatusEffects(Player p) {
 
-        p.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 180*20, 3));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 180*20, 3));
         p.addPotionEffect(new PotionEffect(PotionEffectType.UNLUCK, 360*20, 1));
         p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 90 * 20, 0));
     }

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 
 import com.javezki.LifeFaction.LifeUtil.LifeRecipes;
+import com.javezki.Materials.MaterialRecipes;
 import com.javezki.Attributes.AttributeEvents;
 import com.javezki.DarkFaction.CorruptedEvents;
+import com.javezki.DarkFaction.CorruptedRecipes;
 import com.javezki.GeneralFaction.GeneralItems.GeneralEvents.GeneralEvent;
 import com.javezki.LifeFaction.LifeUtil.LifeEvents;
 import com.javezki.PluginLib.GiveCommand;
@@ -71,6 +73,9 @@ public class VoidMain extends JavaPlugin
         TeleportingRecipes endCraft = new TeleportingRecipes();
         LifeRecipes lifeCraft = new LifeRecipes();
         WorkstationRecipes workCraft = new WorkstationRecipes();
+        CorruptedRecipes corruptedCraft = new CorruptedRecipes();
+        MaterialRecipes materialCraft = new MaterialRecipes();
+        getServer().addRecipe(materialCraft.compressedBlazeRod());
         getServer().addRecipe(workCraft.researchTable());
         getServer().addRecipe(endCraft.teleportBowRecipe());
         getServer().addRecipe(endCraft.enderShard());
@@ -81,6 +86,7 @@ public class VoidMain extends JavaPlugin
         getServer().addRecipe(lifeCraft.fLifeHelmet());
         getServer().addRecipe(lifeCraft.fLifeShard());
         getServer().addRecipe(lifeCraft.fLifeTomb());
+        getServer().addRecipe(corruptedCraft.corruptedWand());
     }
 
     public static FileConfiguration getResearchLocationConfig()  
