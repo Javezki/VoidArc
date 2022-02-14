@@ -1,3 +1,5 @@
 main/test/
 target/
 target/classes/com/javezki/Attributes/AttributeEvents.class
+*.class
+
