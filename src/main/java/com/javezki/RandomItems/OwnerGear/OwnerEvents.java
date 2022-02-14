@@ -10,6 +10,7 @@ import com.javezki.RandomItems.OwnerGear.OwnerArmour.OwnerChestplate;
 import com.javezki.RandomItems.OwnerGear.OwnerArmour.OwnerHelmet;
 import com.javezki.RandomItems.OwnerGear.OwnerArmour.OwnerLeggings;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -60,7 +61,8 @@ public class OwnerEvents implements Listener {
                 if (oArmour.equals(pArmour))
                 {
                     ev.setCancelled(true);
-                    p.sendMessage("You cannot attack ANYTHING while wearing owner armour!");
+                    p.sendMessage(ChatColor.RED + "You cannot attack ANYTHING while wearing owner armour!");
+                    return;
                 }
             }
         }
