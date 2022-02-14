@@ -81,7 +81,7 @@ public class LifeEvents implements Listener {
                 continue;
             if (armor[i].equals(lifeArmor[0])) {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 3));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 6));
             } else if (armor[i].equals(lifeArmor[1])) {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
             } else if (armor[i].equals(lifeArmor[2])) {

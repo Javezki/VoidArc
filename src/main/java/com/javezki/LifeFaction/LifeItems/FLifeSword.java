@@ -6,6 +6,9 @@ import com.javezki.Materials.SmallLifeForce;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -39,7 +42,9 @@ public class FLifeSword extends LifeItems{
         meta.getPersistentDataContainer()
         .set(key, PersistentDataType.STRING, FLifeEnum.fLifeSword.name());
 
-        meta.addEnchant(Enchantment.FIRE_ASPECT, 2, false);
+        meta.addEnchant(Enchantment.DAMAGE_UNDEAD, 5, false);
+
+        meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("Base Attack", 12, Operation.ADD_NUMBER));
 
         sword.setItemMeta(meta);
 

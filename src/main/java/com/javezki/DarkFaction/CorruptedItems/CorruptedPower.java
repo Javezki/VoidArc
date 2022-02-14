@@ -71,7 +71,7 @@ public class CorruptedPower extends CorruptedItem {
 
     private final void giveStatusEffects(Player p) {
 
-        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 180*20, 3));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 180*20, 1));
         p.addPotionEffect(new PotionEffect(PotionEffectType.UNLUCK, 360*20, 1));
         p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 90 * 20, 0));
     }

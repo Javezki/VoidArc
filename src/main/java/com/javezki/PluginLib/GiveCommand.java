@@ -6,6 +6,7 @@ import com.javezki.GeneralFaction.GeneralItems.GeneralItems.SoulPaper;
 import com.javezki.GeneralFaction.GeneralItems.GeneralItems.UnbreakablePP;
 import com.javezki.LifeFaction.LifeItems.FLifeSword;
 import com.javezki.LifeFaction.LifeUtil.LifeCommands;
+import com.javezki.OwnerGear.OwnerCommand;
 import com.javezki.TeleportingBow.TeleportArrow;
 import com.javezki.TeleportingBow.TeleportBow;
 import com.javezki.Workstations.WorkstationCommands;
@@ -32,6 +33,8 @@ public class GiveCommand implements CommandExecutor {
 
         Player p = (Player) sender;
         new LifeCommands(args, p).runCommand();
+
+        new OwnerCommand(sender, cmd, str, args).giveOwnerSet();
 
         p.getInventory().addItem(new TeleportBow().getTeleportBow());
 

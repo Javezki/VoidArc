@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import com.javezki.LifeFaction.LifeUtil.LifeRecipes;
 import com.javezki.Materials.MaterialRecipes;
+import com.javezki.OwnerGear.Excalibur;
+import com.javezki.OwnerGear.OwnerEvents;
 import com.javezki.Attributes.AttributeEvents;
 import com.javezki.DarkFaction.CorruptedEvents;
 import com.javezki.DarkFaction.CorruptedRecipes;
@@ -16,7 +18,6 @@ import com.javezki.PluginLib.WorkstationEvents;
 import com.javezki.TeleportingBow.TeleportingRecipes;
 import com.javezki.Workstations.ResearchTableEvent;
 import com.javezki.Workstations.WorkstationRecipes;
-import com.javezki.TeleportingBow.TeleportBowCommand;
 import com.javezki.TeleportingBow.TeleportEvent;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -52,6 +53,7 @@ public class VoidMain extends JavaPlugin
         getServer().getPluginManager().registerEvents(new CorruptedEvents(), this);
         getServer().getPluginManager().registerEvents(new AttributeEvents(), this);
         getServer().getPluginManager().registerEvents(new GeneralEvent(), this);
+        getServer().getPluginManager().registerEvents(new OwnerEvents(), this);
         getServer().getLogger().info(ChatColor.BLUE + "Initializing Crafting Methods...");
         recipes();
         getServer().getLogger().info(ChatColor.BLUE + "Initializing save file");
@@ -88,6 +90,7 @@ public class VoidMain extends JavaPlugin
         getServer().addRecipe(lifeCraft.fLifeTomb());
         getServer().addRecipe(corruptedCraft.corruptedWand());
         getServer().addRecipe(lifeCraft.FLifeSword());
+        getServer().addRecipe(Excalibur.getInstace().getRecipe());
     }
 
     public static FileConfiguration getResearchLocationConfig()  

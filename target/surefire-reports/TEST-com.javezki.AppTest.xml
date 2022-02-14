@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.javezki.AppTest" time="0.13" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.javezki.AppTest" time="0.089" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\liuna\AppData\Local\Temp\surefire2249875954596222506\surefirebooter12856786836893019695.jar C:\Users\liuna\AppData\Local\Temp\surefire2249875954596222506 2022-02-11T22-08-04_788-jvmRun1 surefire17309633627427161279tmp surefire_012003535574041183752tmp"/>
+    <property name="sun.java.command" value="C:\Users\liuna\AppData\Local\Temp\surefire12023466224122810289\surefirebooter2762480928858763782.jar C:\Users\liuna\AppData\Local\Temp\surefire12023466224122810289 2022-02-13T12-54-27_725-jvmRun1 surefire6899207025520799215tmp surefire_04299563904567080304tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="c:\Users\liuna\Documents\Java Programs\Plugins\voidarc\target\test-classes;c:\Users\liuna\Documents\Java Programs\Plugins\voidarc\target\classes;C:\Users\liuna\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\liuna\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\liuna\.m2\repository\io\papermc\paper\paper-api\1.18.1-R0.1-SNAPSHOT\paper-api-1.18.1-R0.1-SNAPSHOT.jar;C:\Users\liuna\.m2\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar;C:\Users\liuna\.m2\repository\com\google\guava\guava\31.0.1-jre\guava-31.0.1-jre.jar;C:\Users\liuna\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\liuna\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\liuna\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\liuna\.m2\repository\com\google\errorprone\error_prone_annotations\2.7.1\error_prone_annotations-2.7.1.jar;C:\Users\liuna\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\liuna\.m2\repository\com\google\code\gson\gson\2.8.8\gson-2.8.8.jar;C:\Users\liuna\.m2\repository\net\md-5\bungeecord-chat\1.16-R0.4\bungeecord-chat-1.16-R0.4.jar;C:\Users\liuna\.m2\repository\org\yaml\snakeyaml\1.30\snakeyaml-1.30.jar;C:\Users\liuna\.m2\repository\com\googlecode\json-simple\json-simple\1.1.1\json-simple-1.1.1.jar;C:\Users\liuna\.m2\repository\it\unimi\dsi\fastutil\8.5.6\fastutil-8.5.6.jar;C:\Users\liuna\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.1\log4j-api-2.17.1.jar;C:\Users\liuna\.m2\repository\org\slf4j\slf4j-api\1.8.0-beta4\slf4j-api-1.8.0-beta4.jar;C:\Users\liuna\.m2\repository\net\kyori\adventure-api\4.9.3\adventure-api-4.9.3.jar;C:\Users\liuna\.m2\repository\net\kyori\adventure-key\4.9.3\adventure-key-4.9.3.jar;C:\Users\liuna\.m2\repository\net\kyori\examination-api\1.3.0\examination-api-1.3.0.jar;C:\Users\liuna\.m2\repository\net\kyori\examination-string\1.3.0\examination-string-1.3.0.jar;C:\Users\liuna\.m2\repository\org\jetbrains\annotations\22.0.0\annotations-22.0.0.jar;C:\Users\liuna\.m2\repository\net\kyori\adventure-text-serializer-gson\4.9.3\adventure-text-serializer-gson-4.9.3.jar;C:\Users\liuna\.m2\repository\net\kyori\adventure-text-serializer-legacy\4.9.3\adventure-text-serializer-legacy-4.9.3.jar;C:\Users\liuna\.m2\repository\net\kyori\adventure-text-serializer-plain\4.9.3\adventure-text-serializer-plain-4.9.3.jar;C:\Users\liuna\.m2\repository\org\checkerframework\checker-qual\3.21.0\checker-qual-3.21.0.jar;C:\Users\liuna\.m2\repository\org\ow2\asm\asm\9.2\asm-9.2.jar;C:\Users\liuna\.m2\repository\org\ow2\asm\asm-commons\9.2\asm-commons-9.2.jar;C:\Users\liuna\.m2\repository\org\ow2\asm\asm-tree\9.2\asm-tree-9.2.jar;C:\Users\liuna\.m2\repository\org\ow2\asm\asm-analysis\9.2\asm-analysis-9.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\liuna\AppData\Local\Temp\surefire2249875954596222506\surefirebooter12856786836893019695.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\liuna\AppData\Local\Temp\surefire12023466224122810289\surefirebooter2762480928858763782.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.1+12-LTS-39"/>
@@ -56,5 +56,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.javezki.AppTest" time="0.005"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.javezki.AppTest" time="0.004"/>
 </testsuite>
