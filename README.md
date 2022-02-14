@@ -18,6 +18,6 @@ mess of a folder.
 
 Possibly. Again, this is just an intro to Minecraft Plugin Development for me and is really a lot of fun. So if anyone ever bothers reading this drop me a friend request on Discord: Javezki#0691 and shoot me some ideas
 
-
+## ray was here
 
 
