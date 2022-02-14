@@ -16,9 +16,9 @@ public class OwnerCommand {
     
     private CommandSender sender;
     
-    private String str;
+    // private String str;
 
-    private Command cmd;
+    // private Command cmd;
 
     private String[] args;
 
@@ -26,9 +26,9 @@ public class OwnerCommand {
     {
         this.sender = sender;
 
-        this.cmd = cmd;
+        // this.cmd = cmd;
 
-        this.str = str;
+        // this.str = str;
 
         this.args = args;
     }
