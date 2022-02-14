@@ -1,17 +1,16 @@
 package com.javezki.PluginLib;
 
-import com.javezki.DarkFaction.CorruptedItems.CorruptedFlesh;
-import com.javezki.DarkFaction.CorruptedItems.CorruptedPower;
-import com.javezki.GeneralFaction.GeneralItems.GeneralItems.SoulPaper;
-import com.javezki.GeneralFaction.GeneralItems.GeneralItems.UnbreakablePP;
-import com.javezki.LifeFaction.LifeItems.FLifeSword;
-import com.javezki.LifeFaction.LifeUtil.LifeCommands;
-import com.javezki.OwnerGear.OwnerCommand;
-import com.javezki.TeleportingBow.TeleportArrow;
-import com.javezki.TeleportingBow.TeleportBow;
+import com.javezki.Factions.DarkFaction.CorruptedItems.CorruptedFlesh;
+import com.javezki.Factions.DarkFaction.CorruptedItems.CorruptedPower;
+import com.javezki.Factions.GeneralFaction.GeneralItems.GeneralItems.SoulPaper;
+import com.javezki.Factions.GeneralFaction.GeneralItems.GeneralItems.UnbreakablePP;
+import com.javezki.Factions.LifeFaction.LifeItems.FLifeSword;
+import com.javezki.Factions.LifeFaction.LifeUtil.LifeCommands;
+import com.javezki.RandomItems.OwnerGear.OwnerCommand;
+import com.javezki.RandomItems.TeleportingBow.TeleportArrow;
+import com.javezki.RandomItems.TeleportingBow.TeleportBow;
 import com.javezki.Workstations.WorkstationCommands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

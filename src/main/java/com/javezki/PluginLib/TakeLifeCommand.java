@@ -1,6 +1,6 @@
 package com.javezki.PluginLib;
 
-import com.javezki.GeneralFaction.GeneralItems.GeneralItems.SoulPaper;
+import com.javezki.Factions.GeneralFaction.GeneralItems.GeneralItems.SoulPaper;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;

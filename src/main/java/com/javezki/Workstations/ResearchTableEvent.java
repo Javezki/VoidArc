@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javezki.VoidMain;
-import com.javezki.LifeFaction.LifeMaterials.LifeMaterial;
-import com.javezki.LifeFaction.LifeMaterials.LilyPad;
-import com.javezki.LifeFaction.LifeMaterials.MagicalOak;
-import com.javezki.LifeFaction.LifeMaterials.SugarCane;
-import com.javezki.LifeFaction.LifeMaterials.SweetDandelion;
+import com.javezki.Factions.LifeFaction.LifeMaterials.LifeMaterial;
+import com.javezki.Factions.LifeFaction.LifeMaterials.LilyPad;
+import com.javezki.Factions.LifeFaction.LifeMaterials.MagicalOak;
+import com.javezki.Factions.LifeFaction.LifeMaterials.SugarCane;
+import com.javezki.Factions.LifeFaction.LifeMaterials.SweetDandelion;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
