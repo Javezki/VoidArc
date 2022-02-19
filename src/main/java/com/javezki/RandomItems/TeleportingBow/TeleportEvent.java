@@ -68,7 +68,7 @@ public class TeleportEvent implements Listener {
 
         ev.getEntity().remove();
         //Damaged
-        //Corrupted
+        //normal
         //Reinforced
 
     }

@@ -31,6 +31,8 @@ public class GiveCommand implements CommandExecutor {
         }
 
         Player p = (Player) sender;
+
+        if (!p.isOp())  return false;
         new LifeCommands(args, p).runCommand();
 
         new OwnerCommand(sender, cmd, str, args).giveOwnerSet();

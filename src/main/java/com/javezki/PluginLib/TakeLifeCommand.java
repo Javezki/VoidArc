@@ -19,7 +19,11 @@ public class TakeLifeCommand implements CommandExecutor{
 
                 if (!(sender instanceof Player))  return false;
 
-                if (args.length <= 2 )    return false;
+                if (args.length <= 1 )    return false;
+
+                Player p = (Player) sender;
+
+                if (!p.isOp())  return false;
 
                 Player target = Bukkit.getServer().getPlayer(args[0]);
 
@@ -29,7 +33,7 @@ public class TakeLifeCommand implements CommandExecutor{
 
                 target.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(targetMaxLife - 2);
 
-                Player p = (Player) sender;
+
 
                 p.getInventory().addItem(new SoulPaper().getItem());
 
